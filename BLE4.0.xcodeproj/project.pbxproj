@@ -1,0 +1,369 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		777D300220E628EA0023333E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777D300120E628EA0023333E /* AppDelegate.swift */; };
+		777D300920E628EB0023333E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 777D300820E628EB0023333E /* Assets.xcassets */; };
+		777D300C20E628EB0023333E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 777D300A20E628EB0023333E /* LaunchScreen.storyboard */; };
+		777D301520E629520023333E /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777D301420E629520023333E /* CenterViewController.swift */; };
+		777D301720E629870023333E /* PeripheralViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777D301620E629870023333E /* PeripheralViewController.swift */; };
+		777D301920E629A60023333E /* BLECenterManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777D301820E629A60023333E /* BLECenterManager.swift */; };
+		777D301B20E629D00023333E /* BLEPeripheralManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777D301A20E629D00023333E /* BLEPeripheralManager.swift */; };
+		777D301D20E62A210023333E /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 777D301C20E62A210023333E /* RootViewController.swift */; };
+		777D301F20E62AE60023333E /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 777D301E20E62AE60023333E /* RootViewController.xib */; };
+		777D302120E62EAE0023333E /* CenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 777D302020E62EAE0023333E /* CenterViewController.xib */; };
+		777D302320E62EC80023333E /* PeripheralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 777D302220E62EC80023333E /* PeripheralViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		777D2FFE20E628EA0023333E /* BLE4.0.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BLE4.0.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		777D300120E628EA0023333E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		777D300820E628EB0023333E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		777D300B20E628EB0023333E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		777D300D20E628EB0023333E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		777D301420E629520023333E /* CenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
+		777D301620E629870023333E /* PeripheralViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeripheralViewController.swift; sourceTree = "<group>"; };
+		777D301820E629A60023333E /* BLECenterManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLECenterManager.swift; sourceTree = "<group>"; };
+		777D301A20E629D00023333E /* BLEPeripheralManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BLEPeripheralManager.swift; sourceTree = "<group>"; };
+		777D301C20E62A210023333E /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		777D301E20E62AE60023333E /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
+		777D302020E62EAE0023333E /* CenterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CenterViewController.xib; sourceTree = "<group>"; };
+		777D302220E62EC80023333E /* PeripheralViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PeripheralViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		777D2FFB20E628EA0023333E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		777D2FF520E628EA0023333E = {
+			isa = PBXGroup;
+			children = (
+				777D300020E628EA0023333E /* BLE4.0 */,
+				777D2FFF20E628EA0023333E /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		777D2FFF20E628EA0023333E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				777D2FFE20E628EA0023333E /* BLE4.0.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		777D300020E628EA0023333E /* BLE4.0 */ = {
+			isa = PBXGroup;
+			children = (
+				777D300120E628EA0023333E /* AppDelegate.swift */,
+				777D301C20E62A210023333E /* RootViewController.swift */,
+				777D301E20E62AE60023333E /* RootViewController.xib */,
+				777D301420E629520023333E /* CenterViewController.swift */,
+				777D302020E62EAE0023333E /* CenterViewController.xib */,
+				777D301620E629870023333E /* PeripheralViewController.swift */,
+				777D302220E62EC80023333E /* PeripheralViewController.xib */,
+				777D301320E629130023333E /* Manager */,
+				777D300820E628EB0023333E /* Assets.xcassets */,
+				777D300A20E628EB0023333E /* LaunchScreen.storyboard */,
+				777D300D20E628EB0023333E /* Info.plist */,
+			);
+			path = BLE4.0;
+			sourceTree = "<group>";
+		};
+		777D301320E629130023333E /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				777D301820E629A60023333E /* BLECenterManager.swift */,
+				777D301A20E629D00023333E /* BLEPeripheralManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		777D2FFD20E628EA0023333E /* BLE4.0 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 777D301020E628EB0023333E /* Build configuration list for PBXNativeTarget "BLE4.0" */;
+			buildPhases = (
+				777D2FFA20E628EA0023333E /* Sources */,
+				777D2FFB20E628EA0023333E /* Frameworks */,
+				777D2FFC20E628EA0023333E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BLE4.0;
+			productName = BLE4.0;
+			productReference = 777D2FFE20E628EA0023333E /* BLE4.0.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		777D2FF620E628EA0023333E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0940;
+				LastUpgradeCheck = 0940;
+				ORGANIZATIONNAME = Aresmob;
+				TargetAttributes = {
+					777D2FFD20E628EA0023333E = {
+						CreatedOnToolsVersion = 9.4;
+					};
+				};
+			};
+			buildConfigurationList = 777D2FF920E628EA0023333E /* Build configuration list for PBXProject "BLE4.0" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 777D2FF520E628EA0023333E;
+			productRefGroup = 777D2FFF20E628EA0023333E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				777D2FFD20E628EA0023333E /* BLE4.0 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		777D2FFC20E628EA0023333E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				777D300C20E628EB0023333E /* LaunchScreen.storyboard in Resources */,
+				777D302120E62EAE0023333E /* CenterViewController.xib in Resources */,
+				777D300920E628EB0023333E /* Assets.xcassets in Resources */,
+				777D301F20E62AE60023333E /* RootViewController.xib in Resources */,
+				777D302320E62EC80023333E /* PeripheralViewController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		777D2FFA20E628EA0023333E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				777D301720E629870023333E /* PeripheralViewController.swift in Sources */,
+				777D301520E629520023333E /* CenterViewController.swift in Sources */,
+				777D301D20E62A210023333E /* RootViewController.swift in Sources */,
+				777D301B20E629D00023333E /* BLEPeripheralManager.swift in Sources */,
+				777D300220E628EA0023333E /* AppDelegate.swift in Sources */,
+				777D301920E629A60023333E /* BLECenterManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		777D300A20E628EB0023333E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				777D300B20E628EB0023333E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		777D300E20E628EB0023333E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		777D300F20E628EB0023333E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		777D301120E628EB0023333E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 76MM79XMJ9;
+				INFOPLIST_FILE = BLE4.0/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aresmob.BLE4-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5b35aab1-db40-48b0-b7e9-65580b2e06c8";
+				PROVISIONING_PROFILE_SPECIFIER = AllApp_Dev;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		777D301220E628EB0023333E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 76MM79XMJ9;
+				INFOPLIST_FILE = BLE4.0/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.aresmob.BLE4-0";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "5b35aab1-db40-48b0-b7e9-65580b2e06c8";
+				PROVISIONING_PROFILE_SPECIFIER = AllApp_Dev;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		777D2FF920E628EA0023333E /* Build configuration list for PBXProject "BLE4.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				777D300E20E628EB0023333E /* Debug */,
+				777D300F20E628EB0023333E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		777D301020E628EB0023333E /* Build configuration list for PBXNativeTarget "BLE4.0" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				777D301120E628EB0023333E /* Debug */,
+				777D301220E628EB0023333E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 777D2FF620E628EA0023333E /* Project object */;
+}
