@@ -27,6 +27,7 @@
                         <constraint firstAttribute="height" constant="80" id="hgb-Xr-47m"/>
                         <constraint firstAttribute="width" constant="240" id="skr-mE-fKw"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="作为中心设备"/>
                     <connections>
                         <action selector="centerAction:" destination="-1" eventType="touchUpInside" id="TNi-Qc-tKW"/>
@@ -35,6 +36,7 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEK-hX-ijn">
                     <rect key="frame" x="67" y="360" width="240" height="80"/>
                     <color key="backgroundColor" red="0.62352941179999999" green="0.69019607839999997" blue="0.7725490196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
                     <state key="normal" title="作为外设"/>
                     <connections>
                         <action selector="peripheralAction:" destination="-1" eventType="touchUpInside" id="C97-kN-no0"/>

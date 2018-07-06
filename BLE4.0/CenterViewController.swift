@@ -12,6 +12,8 @@ import UIKit
 class CenterViewController: UIViewController {
     override func viewDidLoad() {
         self.title = "中心设备"
+        
+        BLECenterManager.sharedManager.scan();
     }
     
     override func viewWillDisappear(_ animated: Bool) {
