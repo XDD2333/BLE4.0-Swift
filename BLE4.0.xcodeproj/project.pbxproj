@@ -18,6 +18,11 @@
 		777D301F20E62AE60023333E /* RootViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 777D301E20E62AE60023333E /* RootViewController.xib */; };
 		777D302120E62EAE0023333E /* CenterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 777D302020E62EAE0023333E /* CenterViewController.xib */; };
 		777D302320E62EC80023333E /* PeripheralViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 777D302220E62EC80023333E /* PeripheralViewController.xib */; };
+		77CAD38620F35808009406A2 /* LogCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CAD38420F35808009406A2 /* LogCell.swift */; };
+		77CAD38720F35808009406A2 /* LogCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77CAD38520F35808009406A2 /* LogCell.xib */; };
+		77CAD38920F3588C009406A2 /* LogView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CAD38820F3588C009406A2 /* LogView.swift */; };
+		77CAD38B20F3589C009406A2 /* LogView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 77CAD38A20F3589C009406A2 /* LogView.xib */; };
+		77CAD38D20F36AB0009406A2 /* LogHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CAD38C20F36AB0009406A2 /* LogHandle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +39,11 @@
 		777D301E20E62AE60023333E /* RootViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RootViewController.xib; sourceTree = "<group>"; };
 		777D302020E62EAE0023333E /* CenterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CenterViewController.xib; sourceTree = "<group>"; };
 		777D302220E62EC80023333E /* PeripheralViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PeripheralViewController.xib; sourceTree = "<group>"; };
+		77CAD38420F35808009406A2 /* LogCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogCell.swift; sourceTree = "<group>"; };
+		77CAD38520F35808009406A2 /* LogCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogCell.xib; sourceTree = "<group>"; };
+		77CAD38820F3588C009406A2 /* LogView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogView.swift; sourceTree = "<group>"; };
+		77CAD38A20F3589C009406A2 /* LogView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogView.xib; sourceTree = "<group>"; };
+		77CAD38C20F36AB0009406A2 /* LogHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogHandle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +83,10 @@
 				777D302020E62EAE0023333E /* CenterViewController.xib */,
 				777D301620E629870023333E /* PeripheralViewController.swift */,
 				777D302220E62EC80023333E /* PeripheralViewController.xib */,
+				77CAD38420F35808009406A2 /* LogCell.swift */,
+				77CAD38520F35808009406A2 /* LogCell.xib */,
+				77CAD38820F3588C009406A2 /* LogView.swift */,
+				77CAD38A20F3589C009406A2 /* LogView.xib */,
 				777D301320E629130023333E /* Manager */,
 				777D300820E628EB0023333E /* Assets.xcassets */,
 				777D300A20E628EB0023333E /* LaunchScreen.storyboard */,
@@ -86,6 +100,7 @@
 			children = (
 				777D301820E629A60023333E /* BLECenterManager.swift */,
 				777D301A20E629D00023333E /* BLEPeripheralManager.swift */,
+				77CAD38C20F36AB0009406A2 /* LogHandle.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -150,7 +165,9 @@
 			files = (
 				777D300C20E628EB0023333E /* LaunchScreen.storyboard in Resources */,
 				777D302120E62EAE0023333E /* CenterViewController.xib in Resources */,
+				77CAD38720F35808009406A2 /* LogCell.xib in Resources */,
 				777D300920E628EB0023333E /* Assets.xcassets in Resources */,
+				77CAD38B20F3589C009406A2 /* LogView.xib in Resources */,
 				777D301F20E62AE60023333E /* RootViewController.xib in Resources */,
 				777D302320E62EC80023333E /* PeripheralViewController.xib in Resources */,
 			);
@@ -167,6 +184,9 @@
 				777D301520E629520023333E /* CenterViewController.swift in Sources */,
 				777D301D20E62A210023333E /* RootViewController.swift in Sources */,
 				777D301B20E629D00023333E /* BLEPeripheralManager.swift in Sources */,
+				77CAD38D20F36AB0009406A2 /* LogHandle.swift in Sources */,
+				77CAD38620F35808009406A2 /* LogCell.swift in Sources */,
+				77CAD38920F3588C009406A2 /* LogView.swift in Sources */,
 				777D300220E628EA0023333E /* AppDelegate.swift in Sources */,
 				777D301920E629A60023333E /* BLECenterManager.swift in Sources */,
 			);
@@ -304,18 +324,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 76MM79XMJ9;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3X5MW65577;
 				INFOPLIST_FILE = BLE4.0/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.aresmob.BLE4-0";
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.BLE4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5b35aab1-db40-48b0-b7e9-65580b2e06c8";
-				PROVISIONING_PROFILE_SPECIFIER = AllApp_Dev;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -325,18 +346,19 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = 76MM79XMJ9;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3X5MW65577;
 				INFOPLIST_FILE = BLE4.0/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.aresmob.BLE4-0";
+				PRODUCT_BUNDLE_IDENTIFIER = com.test.BLE4;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "5b35aab1-db40-48b0-b7e9-65580b2e06c8";
-				PROVISIONING_PROFILE_SPECIFIER = AllApp_Dev;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

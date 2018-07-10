@@ -12,6 +12,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CenterViewController" customModule="BLE4_0" customModuleProvider="target">
             <connections>
+                <outlet property="disConnect" destination="lMV-a7-wbu" id="qBU-yt-zjr"/>
+                <outlet property="logView" destination="gUa-ic-oAT" id="GKe-gh-rr8"/>
+                <outlet property="reScan" destination="nUy-Up-bAK" id="9dN-ve-mdx"/>
                 <outlet property="view" destination="iN0-l3-epB" id="NbM-Pg-Ufw"/>
             </connections>
         </placeholder>
@@ -19,7 +22,35 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gUa-ic-oAT" customClass="LogView" customModule="BLE4_0" customModuleProvider="target">
+                    <rect key="frame" x="10" y="220" width="355" height="447"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nUy-Up-bAK">
+                    <rect key="frame" x="46" y="75" width="52" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="ReScan"/>
+                    <connections>
+                        <action selector="ReScanAction:" destination="-1" eventType="touchUpInside" id="0Cj-wh-Hnt"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lMV-a7-wbu">
+                    <rect key="frame" x="257" y="75" width="81" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="DIsConnect"/>
+                    <connections>
+                        <action selector="DisConnectAction:" destination="-1" eventType="touchUpInside" id="AeB-mS-6E5"/>
+                    </connections>
+                </button>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="gUa-ic-oAT" secondAttribute="bottom" id="63d-qm-gP6"/>
+                <constraint firstItem="gUa-ic-oAT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="CZ0-rE-Z8K"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gUa-ic-oAT" secondAttribute="trailing" constant="10" id="hRB-oN-mdS"/>
+                <constraint firstItem="gUa-ic-oAT" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="200" id="rCr-4B-n0g"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
         </view>
     </objects>

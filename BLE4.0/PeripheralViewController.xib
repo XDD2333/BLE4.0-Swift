@@ -12,6 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PeripheralViewController" customModule="BLE4_0" customModuleProvider="target">
             <connections>
+                <outlet property="logView" destination="6dG-CT-lJT" id="I2W-KC-rMG"/>
                 <outlet property="view" destination="iN0-l3-epB" id="BdN-ch-P0Y"/>
             </connections>
         </placeholder>
@@ -19,7 +20,35 @@
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6dG-CT-lJT" customClass="LogView" customModule="BLE4_0" customModuleProvider="target">
+                    <rect key="frame" x="10" y="220" width="355" height="447"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDt-Hm-ias">
+                    <rect key="frame" x="37" y="72" width="110" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="startAdvertising"/>
+                    <connections>
+                        <action selector="startAction:" destination="-1" eventType="touchUpInside" id="KBN-Xq-OEw"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HHi-xA-nMB">
+                    <rect key="frame" x="212" y="72" width="109" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="StopAdvertising"/>
+                    <connections>
+                        <action selector="stopAction:" destination="-1" eventType="touchUpInside" id="AyO-Xs-0TI"/>
+                    </connections>
+                </button>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="6dG-CT-lJT" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="200" id="5uc-QD-k5E"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="6dG-CT-lJT" secondAttribute="bottom" id="9B3-Un-12c"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="6dG-CT-lJT" secondAttribute="trailing" constant="10" id="Opx-a1-BhE"/>
+                <constraint firstItem="6dG-CT-lJT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="x09-JK-yMt"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
         </view>
     </objects>
