@@ -18,13 +18,26 @@ let kConnectTimeOut = 5
 import Foundation
 import CoreBluetooth
 
+protocol BLECenterManagerDelegate {
+    func bleCenterManagerRSSIupdated(_ RSSI: NSNumber)
+    func bleDidUpdateValue(_ data: DataModel, _ error: Error?)
+    func bleDidWriteValue(_ data: Data, _error: Error?)
+}
+
 class BLECenterManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate {
     static let sharedManager: BLECenterManager = BLECenterManager()
     var centerManager: CBCentralManager?
     var curName: String?
     var curPeripheral: CBPeripheral?
+    var writeCharacteristic: CBCharacteristic?
+    
 
     var logDelegate: LogDelegate?
+    var eventDelegate: BLECenterManagerDelegate?
+    
+    var allowDuplicate: Bool = false
+    var onlyBLE: Bool = false  /// 只搜索指定设备
+    var onlyScan: Bool = false
     
     
     /// MARK: Init
@@ -35,7 +48,13 @@ class BLECenterManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     
     /// 开始扫描外设
     func scan() {
-        centerManager!.scanForPeripherals(withServices: [CBUUID.init(string: ServiceUUID)], options: [:])
+        if allowDuplicate, onlyBLE {
+            centerManager!.scanForPeripherals(withServices: [CBUUID.init(string: ServiceUUID)], options: [CBCentralManagerScanOptionAllowDuplicatesKey: true])
+        } else if (onlyBLE) {
+            centerManager!.scanForPeripherals(withServices: [CBUUID.init(string: ServiceUUID)], options: [:])
+        } else {
+            centerManager!.scanForPeripherals(withServices: nil, options: [:])
+        }
     }
     
     func stopScan() {
@@ -54,10 +73,17 @@ class BLECenterManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     }
     
     func reScan() {
+        stopAll()
         curName = ""
         curPeripheral = nil
         scan()
         log("重新扫描")
+    }
+    
+    func writeData(_ data: Data) {
+        if curPeripheral != nil, writeCharacteristic != nil {
+            curPeripheral?.writeValue(data, for: writeCharacteristic!, type: CBCharacteristicWriteType.withResponse)
+        }
     }
     
     /// MARK: CBCentralManagerDelegate
@@ -82,10 +108,16 @@ class BLECenterManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     /// 发现外设
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
         if let name = advertisementData["kCBAdvDataLocalName"] {
-            log("[FOUND] ad device: \(name), RSSI: \(RSSI)db")
+            log("[FOUND] device LocalName: \(name) name:\(String(describing: peripheral.name)), RSSI: \(RSSI)db")
             curName = name as? String
             if name as! String == deviceName {
-                self.connect(peripheral: peripheral)
+                if !onlyScan {
+                    self.connect(peripheral: peripheral)
+                }
+                
+                if eventDelegate != nil {
+                    eventDelegate?.bleCenterManagerRSSIupdated(RSSI)
+                }
             }
         }
     }
@@ -124,13 +156,13 @@ class BLECenterManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     /// 断开连接
     func centralManager(_ central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: Error?) {
         log("[DISCONNECT]:\(String(describing: error?.localizedDescription))")
-        reScan()
+//        reScan()
     }
     
     /// 连接失败
     func centralManager(_ central: CBCentralManager, didFailToConnect peripheral: CBPeripheral, error: Error?) {
         log("[CONNECT] fail:\(String(describing: error?.localizedDescription))")
-        reScan()
+//        reScan()
     }
     
     
@@ -149,8 +181,10 @@ class BLECenterManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         for aCharacteristic in service.characteristics! {
             log("发现特征: \(aCharacteristic.description)")
-            if aCharacteristic.uuid.uuidString.compare(CharacteristicUUID_Notify) == .orderedSame {
+            if aCharacteristic.uuid.uuidString == CharacteristicUUID_Notify {
                 curPeripheral?.setNotifyValue(true, for: aCharacteristic)
+            } else if aCharacteristic.uuid.uuidString == CharacteristicUUID_Write {
+                writeCharacteristic = aCharacteristic
             }
         }
     }
@@ -160,7 +194,11 @@ class BLECenterManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         if error != nil {
             log("接收数据错误: \(String(describing: error?.localizedDescription))")
         } else {
-            log("收到数据: \(String(describing: String.init(data: characteristic.value!, encoding: String.Encoding.utf8)))")
+            log("收到数据: \(String(describing: DataTransferHandle.toHex(data: characteristic.value!)))")
+        }
+        let data: DataModel = DataModel.init(recevied: characteristic.value!)
+        if eventDelegate != nil {
+            eventDelegate?.bleDidUpdateValue(data, error)
         }
     }
     
@@ -169,7 +207,10 @@ class BLECenterManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         if error != nil {
             log("写入数据错误: \(String(describing: error?.localizedDescription))")
         } else {
-            log("写入数据成功: \(String(describing: String.init(data: characteristic.value!, encoding: String.Encoding.utf8)))")
+            log("写入数据成功: \(String(describing: DataTransferHandle.toHex(data: characteristic.value!)))")
+        }
+        if eventDelegate != nil {
+            eventDelegate?.bleDidWriteValue(characteristic.value!, _error: error)
         }
     }
     

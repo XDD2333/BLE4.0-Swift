@@ -18,17 +18,6 @@ class LogView: UIView, UITableViewDataSource, UITableViewDelegate
     
     var arrDatas: NSMutableArray = NSMutableArray.init()
     
-    func addLog(_ text: String) {
-        if arrDatas.count > 500 {
-            arrDatas.removeObjects(in: NSMakeRange(0, 300))
-            tableView.reloadData()
-        }
-        
-        arrDatas.add(text)
-        tableView.insertRows(at: [IndexPath.init(row: arrDatas.count - 1, section: 0)], with:UITableViewRowAnimation.none)
-        tableView.scrollToRow(at: IndexPath.init(row: arrDatas.count - 1, section: 0), at: UITableViewScrollPosition.bottom, animated: true)
-    }
-    
     override func awakeFromNib() {
         logView = UINib.init(nibName: "LogView", bundle: nil).instantiate(withOwner: self, options: nil).last as! UIView
         logView.frame = self.bounds
@@ -47,6 +36,23 @@ class LogView: UIView, UITableViewDataSource, UITableViewDelegate
         cell.setData(str)
         
         return cell
+    }
+    
+    // MAKR: Actions
+    func addLog(_ text: String) {
+        if arrDatas.count > 500 {
+            arrDatas.removeObjects(in: NSMakeRange(0, 300))
+            tableView.reloadData()
+        }
+        
+        arrDatas.add(text)
+        tableView.insertRows(at: [IndexPath.init(row: arrDatas.count - 1, section: 0)], with:UITableViewRowAnimation.none)
+        tableView.scrollToRow(at: IndexPath.init(row: arrDatas.count - 1, section: 0), at: UITableViewScrollPosition.bottom, animated: true)
+    }
+    
+    func clear() {
+        arrDatas.removeAllObjects()
+        tableView.reloadData()
     }
     
     /*

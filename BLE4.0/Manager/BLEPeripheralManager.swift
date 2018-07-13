@@ -7,13 +7,19 @@
 //
 
 import Foundation
+import UIKit
 import CoreBluetooth
 
 class BLEPeripheralManager: NSObject, CBPeripheralManagerDelegate {
     static let sharedManager: BLEPeripheralManager = BLEPeripheralManager()
     var peripheralManager: CBPeripheralManager?
-    var timer: Timer?
+    var curCharacteristics: [CBMutableCharacteristic]?
+    var curService: CBMutableService?
     
+    var arrDataNeedSend: [DataModel]?
+    var didStartSend: Bool = false
+    
+//    var timer: Timer?
     var logDelegate: LogDelegate?
     
     
@@ -27,7 +33,15 @@ class BLEPeripheralManager: NSObject, CBPeripheralManagerDelegate {
     }
     
     func startAdvertising() {
-        config()
+        if (peripheralManager?.isAdvertising)! {
+            stopAdvertising()
+        }
+        
+        if let service = curService {
+            peripheralManager!.startAdvertising([CBAdvertisementDataServiceUUIDsKey: [service.uuid], CBAdvertisementDataLocalNameKey: deviceName])
+        } else {
+            config()
+        }
     }
     
     func peripheralManagerDidUpdateState(_ peripheral: CBPeripheralManager) {
@@ -57,9 +71,11 @@ class BLEPeripheralManager: NSObject, CBPeripheralManagerDelegate {
 
         /// 配置Service
         let service: CBMutableService = CBMutableService.init(type: CBUUID.init(string: ServiceUUID), primary: true)
-        service.characteristics = [characteristicNotify, characteristicWrite]
+        curCharacteristics = [characteristicNotify, characteristicWrite]
+        service.characteristics = curCharacteristics
+        curService = service
         
-        peripheralManager!.add(service)
+        peripheralManager!.add(curService!)
         log("配置完成")
     }
     
@@ -88,27 +104,32 @@ class BLEPeripheralManager: NSObject, CBPeripheralManagerDelegate {
     /// 开启了订阅
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
         log("订阅了特征: \(characteristic.uuid.uuidString)")
-        timer = Timer.scheduledTimer(timeInterval: TimeInterval(1), target: self, selector: #selector(notifyData(aTimer:)), userInfo: characteristic, repeats: true)
-        timer?.fireDate = Date.init()
+        
+        let firstPacket: DataModel = DataModel.init(sendStart: 16)
+        let data: Data = firstPacket.getData()
+        
+        peripheralManager!.updateValue(firstPacket.getData(), for: curCharacteristics![0], onSubscribedCentrals: nil)
+        
+        return
+        if arrDataNeedSend == nil {
+            let image: UIImage = UIImage.init(named: "emoji")!
+            let data: Data = UIImagePNGRepresentation(image)!
+            arrDataNeedSend = DataTransferHandle.splitPackets(with : data)
+            
+            let firstPacket: DataModel = DataModel.init(sendStart: arrDataNeedSend!.count)
+            let lastPacket: DataModel = DataModel.init(sendFinish: arrDataNeedSend!.count)
+            print("123")
+        }
     }
     
     // 取消了订阅
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didUnsubscribeFrom characteristic: CBCharacteristic) {
         log("取消订阅了特征:  \(characteristic.uuid.uuidString)")
-        timer?.invalidate()
     }
     
     // 向中心设备发送数据
-    @objc func notifyData(aTimer: Timer) -> Bool {
-        let characteristic: CBMutableCharacteristic = aTimer.userInfo as! CBMutableCharacteristic
-        let formatter: DateFormatter = DateFormatter.init()
-        formatter.dateFormat = "ss"
-        
-        let dateStr: String = formatter.string(from: Date.init())
-        let data: Data = dateStr.data(using: String.Encoding.utf8)!
-        
-        log("发送数据: \(dateStr)")
-        return peripheralManager!.updateValue(data, for: characteristic, onSubscribedCentrals: nil)
+    func notifyData() {
+//        peripheralManager!.updateValue(data, for: curCharacteristics![0], onSubscribedCentrals: nil)
     }
     
     // 读characteristics请求
