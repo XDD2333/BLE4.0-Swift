@@ -18,8 +18,6 @@ class BLEPeripheralManager: NSObject, CBPeripheralManagerDelegate {
     
     var arrDataNeedSend: [DataModel]?
     var didStartSend: Bool = false
-    
-//    var timer: Timer?
     var logDelegate: LogDelegate?
     
     

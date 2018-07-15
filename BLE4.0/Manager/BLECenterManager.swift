@@ -40,12 +40,13 @@ class BLECenterManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     var onlyScan: Bool = false
     
     
-    /// MARK: Init
+    // MARK: Init
     private override init() {
         super.init()
         centerManager = CBCentralManager.init(delegate: self, queue: DispatchQueue.main)
     }
     
+    // MARK: Actions
     /// 开始扫描外设
     func scan() {
         if allowDuplicate, onlyBLE {
@@ -114,7 +115,7 @@ class BLECenterManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
                 if !onlyScan {
                     self.connect(peripheral: peripheral)
                 }
-                
+
                 if eventDelegate != nil {
                     eventDelegate?.bleCenterManagerRSSIupdated(RSSI)
                 }

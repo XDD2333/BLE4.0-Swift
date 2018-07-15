@@ -13,7 +13,7 @@ public let dataHeader: UInt8 = 0xff /// 数据包header
 /// command
 enum DataCommand: UInt8 {
     case singleData = 0x01             /// 单条完整数据
-    case multipleDataStart = 0x02      /// 分包数据开始发送（发送分包数量）示例 FF 02 02 02 04
+    case multipleDataStart = 0x02      /// 分包数据开始发送（发送分包数量）
     case multipleDataTransfer = 0x03   /// 分包数据传输中
     case multipleDataFinish = 0x04     /// 分包数据发送完毕
     
@@ -30,11 +30,6 @@ class DataModel: NSObject {
     var isValid: Bool = false
     
     
-    override init() {
-        super.init()
-        
-    }
-    
     init(recevied data: Data) {
         super.init()
         header = data[0]
@@ -45,7 +40,6 @@ class DataModel: NSObject {
         let range: ClosedRange = 3...(2 + lengthInt)
         dataContent = data.subdata(in: Range.init(range))
         
-        print("2")
         checkSum = data.last
         isValid = checkSum == DataTransferHandle.getCheckSum(dataContent!, length!)
     }
@@ -57,62 +51,36 @@ class DataModel: NSObject {
         command = DataCommand.multipleDataTransfer
         length = UInt8(data!.count)
         dataContent = data
-//        checkSum = DataTransferHandle.getCheckSum(dataString!, length!)
+        checkSum = DataTransferHandle.getCheckSum(dataContent!, length!)
     }
     
     init(sendStart packets: Int) {
         super.init()
         header = dataHeader
         command = DataCommand.multipleDataStart
-//        length = 4
-//        dataString = DataTransferHandle.toHex(num: packets)
-//        if dataString!.count < 4 {
-//            let count = 4 - dataString!.count - 1
-//            var prefix = ""
-//            for _ in 0...count {
-//                prefix = prefix + "0"
-//            }
-//            dataString = prefix + dataString!
-//        }
-//        checkSum = DataTransferHandle.getCheckSum(dataString!, length!)
+        
+        let hexStr = DataTransferHandle.toHex(num: packets)
+        dataContent = hexStr.data(using: String.Encoding.utf8)!
+        length = UInt8(dataContent!.count)
+        checkSum = DataTransferHandle.getCheckSum(dataContent!, length!)
     }
     
     init(sendFinish packets: Int) {
+        super.init()
         header = dataHeader
         command = DataCommand.multipleDataFinish
-        length = 4
-//        dataString = DataTransferHandle.toHex(num: packets)
-//        if dataString!.count < 4 {
-//            let count = 4 - dataString!.count - 1
-//            var prefix = ""
-//            for _ in 0...count {
-//                prefix = prefix + "0"
-//            }
-//            dataString = prefix + dataString!
-//        }
-//        checkSum = DataTransferHandle.getCheckSum(dataString!, length!)
+        
+        let hexStr = DataTransferHandle.toHex(num: packets)
+        dataContent = hexStr.data(using: String.Encoding.utf8)!
+        length = UInt8(dataContent!.count)
+        checkSum = DataTransferHandle.getCheckSum(dataContent!, length!)
     }
     
     /// 准备需要发送的数据包
     func getData() -> Data {
-        var data: Data = Data()
-        
-        /// header
-//        data.append(DataTransferHandle.dataWithHexString2(str: header! as NSString))
-//        
-//        /// commond
-//        data.append(DataTransferHandle.dataWithHexString2(str: command!.rawValue as NSString))
-//
-//        /// length
-//        let lengthHexStr = DataTransferHandle.toHex(num: length!)
-//        data.append(DataTransferHandle.dataWithHexString2(str: lengthHexStr as NSString))
-//
-//        /// data
-//        data.append(dataString!.data(using: String.Encoding.utf8)!)
-//
-//        /// checkSum
-//        let SumHexStr = DataTransferHandle.toHex(num: checkSum!)
-//        data.append(DataTransferHandle.dataWithHexString2(str: SumHexStr as NSString))
+        var data: Data = Data.init(bytes: [header!, command!.rawValue, length!])
+        data.append(dataContent!)
+        data.append(checkSum!)
         
         return data
     }
