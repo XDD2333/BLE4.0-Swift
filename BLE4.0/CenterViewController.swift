@@ -20,6 +20,9 @@ class CenterViewController: UIViewController, LogDelegate, BLECenterManagerDeleg
     @IBOutlet weak var onlyScanSwitch: UISwitch!
     @IBOutlet weak var lblRSSI: UILabel!
     @IBOutlet weak var progressRSSI: UIProgressView!
+    @IBOutlet weak var transferProgress: UIProgressView!
+    @IBOutlet weak var lblTransfer: UILabel!
+    @IBOutlet weak var imageView: UIImageView!
     
     var arrDataNeedTransfer: [DataModel]?   /// 需要传输的数据分包数组
     var dataReceived: Data = Data()
@@ -93,6 +96,10 @@ class CenterViewController: UIViewController, LogDelegate, BLECenterManagerDeleg
         progressRSSI.progress = Float(RSSI_Int) / 127.0
     }
     
+    func bleDidWriteValue(_ data: Data, _error: Error?) {
+        
+    }
+    
     /// 数据接收后的处理
     func bleDidUpdateValue(_ data: DataModel, _ error: Error?) {
         var logHeader: String?
@@ -101,34 +108,44 @@ class CenterViewController: UIViewController, LogDelegate, BLECenterManagerDeleg
         case .singleData:
             logHeader = "[DATA]收到单条数据, 校验结果: \(data.isValid) value: \(String(describing: data.dataContent!.description))"
         case .multipleDataStart:
-            logHeader = "[DATA]开始接收分包数据, 校验结果: \(data.isValid) 分包数: \(DataTransferHandle.hexToInt(number: data.dataContent!.description))"
-            totalPacketCount = DataTransferHandle.hexToInt(number: data.dataContent!.description)
-            receivedPackets = 0
+            imageView.image = nil
+            transferProgress.progress = 0
+            logHeader = "[DATA]开始接收分包数据, 校验结果: \(data.isValid) 分包数: \(DataTransferHandle.hexToInt(number: DataTransferHandle.toHex(data: data.dataContent!)))"
+            
+            if data.isValid {
+                /// 初始化，准备接收数据
+                totalPacketCount = DataTransferHandle.hexToInt(number: data.dataContent!.description)
+                receivedPackets = 1
+                dataReceived.removeAll()
+                
+                /// 发送命令，可以开始接收数据
+                let dataModel: DataModel = DataModel.init(readyForData: 0)
+                BLECenterManager.sharedManager.writeData(dataModel.getData())
+            }
+            
         case .multipleDataTransfer:
-            receivedPackets! = receivedPackets! + 1
-            logHeader = "[DATA]收到第\(String(describing: receivedPackets))个包, 校验结果: \(data.isValid) 进度: /\(String(describing: totalPacketCount))"
+            logHeader = "[DATA]收到第\(String(describing: receivedPackets))个包, 校验结果: \(data.isValid)"
+            
+            transferProgress.progress = Float(receivedPackets!) / 342.0
+            lblTransfer.text = "\(transferProgress.progress)"
+            
+            if data.isValid {
+                dataReceived.append(data.dataContent!)
+                
+                /// 发送命令，可以开始下一个数据
+                let dataModel: DataModel = DataModel.init(receiveSuc: receivedPackets!)
+                receivedPackets! = receivedPackets! + 1
+                BLECenterManager.sharedManager.writeData(dataModel.getData())
+            }
+            
         case .multipleDataFinish:
             logHeader = "[DATA]分包数据接收完毕"
-        
+            imageView.image = UIImage.init(data: dataReceived)
+            print("finish")
         default:
             print("default")
         }
         
         logMsg(logHeader!)
-        
-        if data.isValid {
-            /// 拼接数据包
-            let packet: Data = data.dataContent!
-            dataReceived.append(packet)
-            
-            /// 数据校验成功，发送回执，接收下一个包
-            let indexStr: String = DataTransferHandle.toHex(num: receivedPackets!)
-            let sendData: Data = indexStr.data(using: String.Encoding.utf8)!
-            BLECenterManager.sharedManager.writeData(sendData)
-        }
-    }
-    
-    func bleDidWriteValue(_ data: Data, _error: Error?) {
-        
     }
 }

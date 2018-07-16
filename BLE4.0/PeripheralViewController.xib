@@ -26,19 +26,35 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SDt-Hm-ias">
-                    <rect key="frame" x="37" y="72" width="110" height="30"/>
+                    <rect key="frame" x="61" y="72" width="62" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="startAdvertising"/>
+                    <state key="normal" title="开始广播"/>
                     <connections>
                         <action selector="startAction:" destination="-1" eventType="touchUpInside" id="KBN-Xq-OEw"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HHi-xA-nMB">
-                    <rect key="frame" x="212" y="72" width="109" height="30"/>
+                    <rect key="frame" x="236" y="72" width="62" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    <state key="normal" title="StopAdvertising"/>
+                    <state key="normal" title="停止广播"/>
                     <connections>
                         <action selector="stopAction:" destination="-1" eventType="touchUpInside" id="AyO-Xs-0TI"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ejn-OY-HO6">
+                    <rect key="frame" x="61" y="133" width="92" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="发送单条数据"/>
+                    <connections>
+                        <action selector="sendSingleData:" destination="-1" eventType="touchUpInside" id="RbK-ck-eqe"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SY8-uM-6t7">
+                    <rect key="frame" x="236" y="133" width="92" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="发送分包数据"/>
+                    <connections>
+                        <action selector="sendMultipleData:" destination="-1" eventType="touchUpInside" id="7h1-eR-mN2"/>
                     </connections>
                 </button>
             </subviews>

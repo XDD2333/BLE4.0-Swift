@@ -14,12 +14,15 @@
             <connections>
                 <outlet property="disConnect" destination="lMV-a7-wbu" id="qBU-yt-zjr"/>
                 <outlet property="duplicateSwitch" destination="1jq-Kx-RSy" id="6UJ-5V-T5L"/>
+                <outlet property="imageView" destination="WcV-bd-ihZ" id="ApL-7t-aPn"/>
                 <outlet property="lblRSSI" destination="2MX-i7-ojM" id="dMr-YF-MkE"/>
+                <outlet property="lblTransfer" destination="XLU-Rm-aIO" id="Xcv-mm-2Xl"/>
                 <outlet property="logView" destination="gUa-ic-oAT" id="GKe-gh-rr8"/>
                 <outlet property="onlyScanSwitch" destination="ylU-wZ-fIe" id="RMV-11-AAs"/>
                 <outlet property="progressRSSI" destination="RtU-IZ-6md" id="dm6-7I-kcK"/>
                 <outlet property="reScan" destination="nUy-Up-bAK" id="9dN-ve-mdx"/>
                 <outlet property="searchLimitSwitch" destination="PK8-KM-xPi" id="lXt-dy-Ve1"/>
+                <outlet property="transferProgress" destination="1Mf-ym-V0m" id="mwH-Sn-5pP"/>
                 <outlet property="view" destination="iN0-l3-epB" id="NbM-Pg-Ufw"/>
             </connections>
         </placeholder>
@@ -29,7 +32,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gUa-ic-oAT" customClass="LogView" customModule="BLE4_0" customModuleProvider="target">
-                    <rect key="frame" x="10" y="265" width="355" height="402"/>
+                    <rect key="frame" x="10" y="346" width="355" height="321"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nUy-Up-bAK">
@@ -116,13 +119,28 @@
                         <action selector="onlySearchValueChanged:" destination="-1" eventType="valueChanged" id="ql4-rF-lrI"/>
                     </connections>
                 </switch>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Mf-ym-V0m">
+                    <rect key="frame" x="98" y="248" width="231" height="2"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </progressView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="0.0%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XLU-Rm-aIO">
+                    <rect key="frame" x="31" y="240" width="58" height="17"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WcV-bd-ihZ">
+                    <rect key="frame" x="152" y="267" width="71" height="71"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </imageView>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="gUa-ic-oAT" secondAttribute="bottom" id="63d-qm-gP6"/>
                 <constraint firstItem="gUa-ic-oAT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="CZ0-rE-Z8K"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gUa-ic-oAT" secondAttribute="trailing" constant="10" id="hRB-oN-mdS"/>
-                <constraint firstItem="gUa-ic-oAT" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="200" id="rCr-4B-n0g"/>
+                <constraint firstItem="gUa-ic-oAT" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="220" id="rCr-4B-n0g"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="33.5" y="53.5"/>

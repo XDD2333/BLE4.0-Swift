@@ -10,12 +10,18 @@ import Foundation
 
 class DataTransferHandle: NSObject {
     
-    /// data转16进制字符串（2 char -> 1 Byte）
-    class func dataWithHexString2(str: NSString) -> Data {
+    /// data转16进制字符串
+    class func dataWithHexString(str: NSString, _ off: Int) -> Data {
         var data: Data = Data.init()
-        for index in stride(from: 0, to: str.length, by: 2) {
-            let range: NSRange = NSMakeRange(index, 2)
-            let hexStr: String = str.substring(with: range)
+        
+        var strNew: NSString = str
+        if off == 2, str.length % 2 == 1 {
+            strNew = ("0" + (str as String)) as NSString
+        }
+        
+        for index in stride(from: 0, to: strNew.length, by: off) {
+            let range: NSRange = NSMakeRange(index, off)
+            let hexStr: String = strNew.substring(with: range)
             
             let scanner: Scanner = Scanner.init(string: hexStr)
             var intValue: UInt32 = 0
@@ -55,7 +61,7 @@ class DataTransferHandle: NSObject {
         var str: String = ""
         
         for (_, value) in data.enumerated() {
-            let strItem: String = String.init(format: "%02X", value)
+            let strItem: String = String.init(format: "%x", value)
             str = str + strItem
         }
         
@@ -63,14 +69,15 @@ class DataTransferHandle: NSObject {
     }
     
     class func getCheckSum(_ data: Data, _ length: UInt8) -> UInt8 {
-        var checkSum: UInt8 = 0
-        checkSum = checkSum + length
+        var checkSum: Int = 0
+        let lengthInt: Int = Int(length)
         
+        checkSum = checkSum + lengthInt
         for value in data {
-            checkSum = checkSum + value
+            checkSum = checkSum + Int(value)
         }
         
-        return checkSum % UInt8(255)
+        return UInt8(checkSum % 255)
     }
     
     class func splitPackets(with data: Data) -> [DataModel] {

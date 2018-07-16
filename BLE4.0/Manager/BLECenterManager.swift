@@ -181,7 +181,7 @@ class BLECenterManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     /// 发现特征
     func peripheral(_ peripheral: CBPeripheral, didDiscoverCharacteristicsFor service: CBService, error: Error?) {
         for aCharacteristic in service.characteristics! {
-            log("发现特征: \(aCharacteristic.description)")
+            log("发现特征: \(aCharacteristic.uuid.uuidString)")
             if aCharacteristic.uuid.uuidString == CharacteristicUUID_Notify {
                 curPeripheral?.setNotifyValue(true, for: aCharacteristic)
             } else if aCharacteristic.uuid.uuidString == CharacteristicUUID_Write {
@@ -195,7 +195,7 @@ class BLECenterManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         if error != nil {
             log("接收数据错误: \(String(describing: error?.localizedDescription))")
         } else {
-            log("收到数据: \(String(describing: DataTransferHandle.toHex(data: characteristic.value!)))")
+//            log("收到数据: \(String(describing: DataTransferHandle.toHex(data: characteristic.value!)))")
         }
         let data: DataModel = DataModel.init(recevied: characteristic.value!)
         if eventDelegate != nil {
@@ -208,10 +208,7 @@ class BLECenterManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
         if error != nil {
             log("写入数据错误: \(String(describing: error?.localizedDescription))")
         } else {
-            log("写入数据成功: \(String(describing: DataTransferHandle.toHex(data: characteristic.value!)))")
-        }
-        if eventDelegate != nil {
-            eventDelegate?.bleDidWriteValue(characteristic.value!, _error: error)
+//            log("写入数据成功")
         }
     }
     

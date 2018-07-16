@@ -43,4 +43,12 @@ class PeripheralViewController: UIViewController, LogDelegate {
     @IBAction func stopAction(_ sender: Any) {
         BLEPeripheralManager.sharedManager.stopAdvertising()
     }
+    
+    @IBAction func sendSingleData(_ sender: Any) {
+        BLEPeripheralManager.sharedManager.sendData()
+    }
+    
+    @IBAction func sendMultipleData(_ sender: Any) {
+        BLEPeripheralManager.sharedManager.sendMultipleData()
+    }
 }

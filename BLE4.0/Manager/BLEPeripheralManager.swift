@@ -102,22 +102,6 @@ class BLEPeripheralManager: NSObject, CBPeripheralManagerDelegate {
     /// 开启了订阅
     func peripheralManager(_ peripheral: CBPeripheralManager, central: CBCentral, didSubscribeTo characteristic: CBCharacteristic) {
         log("订阅了特征: \(characteristic.uuid.uuidString)")
-        
-        let firstPacket: DataModel = DataModel.init(sendStart: 16)
-        let data: Data = firstPacket.getData()
-        
-        peripheralManager!.updateValue(firstPacket.getData(), for: curCharacteristics![0], onSubscribedCentrals: nil)
-        
-        return
-        if arrDataNeedSend == nil {
-            let image: UIImage = UIImage.init(named: "emoji")!
-            let data: Data = UIImagePNGRepresentation(image)!
-            arrDataNeedSend = DataTransferHandle.splitPackets(with : data)
-            
-            let firstPacket: DataModel = DataModel.init(sendStart: arrDataNeedSend!.count)
-            let lastPacket: DataModel = DataModel.init(sendFinish: arrDataNeedSend!.count)
-            print("123")
-        }
     }
     
     // 取消了订阅
@@ -125,33 +109,43 @@ class BLEPeripheralManager: NSObject, CBPeripheralManagerDelegate {
         log("取消订阅了特征:  \(characteristic.uuid.uuidString)")
     }
     
-    // 向中心设备发送数据
-    func notifyData() {
-//        peripheralManager!.updateValue(data, for: curCharacteristics![0], onSubscribedCentrals: nil)
-    }
-    
     // 读characteristics请求
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveRead request: CBATTRequest) {
-        log("收到读characteristics请求")
         if request.characteristic.properties.rawValue & CBCharacteristicProperties.read.rawValue > 0 {
             let data: Data = request.characteristic.value!
             request.value = data
             log("中心设备成功读取: \(data.description)")
             peripheralManager?.respond(to: request, withResult: .success)
         } else {
-            log("中心设备读物失败: 没有读取权限")
+            log("中心设备读取失败: 没有读取权限")
             peripheralManager?.respond(to: request, withResult: .readNotPermitted)
         }
     }
     
     // 写characteristics请求
     func peripheralManager(_ peripheral: CBPeripheralManager, didReceiveWrite requests: [CBATTRequest]) {
-        log("收到读characteristics请求: \(requests.count)个")
         for request: CBATTRequest in requests {
             if request.characteristic.properties.rawValue & CBCharacteristicProperties.write.rawValue > 0 {
                 let characteristic: CBMutableCharacteristic = request.characteristic as! CBMutableCharacteristic
                 characteristic.value = request.value
-                log("中心设备成功写入: \(String(describing: request.value?.description))")
+                let data: DataModel = DataModel.init(recevied: request.value!)
+                log("中心设备成功写入: \(String(describing: data.dataContent?.description))")
+                if data.command == .receiveDataSuccess {
+                    let index: Int = DataTransferHandle.hexToInt(number: DataTransferHandle.toHex(data: data.dataContent!))
+                    if index < arrDataNeedSend!.count {
+                        let needSendData = arrDataNeedSend![index]
+                        peripheralManager!.updateValue(needSendData.getData(), for: curCharacteristics![0], onSubscribedCentrals: nil)
+                    } else {
+                        let lastPacket: DataModel = DataModel.init(sendFinish: arrDataNeedSend!.count)
+                        peripheralManager!.updateValue(lastPacket.getData(), for: curCharacteristics![0], onSubscribedCentrals: nil)
+                    }
+                    
+                } else if data.command == .readyForReceiveData {
+                    /// 发送第一个数据包
+                    let needSendData = arrDataNeedSend?.first
+                    peripheralManager!.updateValue(needSendData!.getData(), for: curCharacteristics![0], onSubscribedCentrals: nil)
+                }
+                
                 peripheralManager?.respond(to: request, withResult: .success)
             } else {
                 log("中心设备写入失败: 没有写入权限")
@@ -165,5 +159,23 @@ class BLEPeripheralManager: NSObject, CBPeripheralManagerDelegate {
         if logDelegate != nil {
             logDelegate!.logMsg(text)
         }
+    }
+    
+    func sendData() {
+        let singleData: DataModel = DataModel.init(sendSingleData: Int(arc4random() % 1000))
+        peripheralManager!.updateValue(singleData.getData(), for: curCharacteristics![0], onSubscribedCentrals: nil)
+    }
+    
+    func sendMultipleData() {
+        if arrDataNeedSend == nil {
+            let image: UIImage = UIImage.init(named: "emoji")!
+            let data: Data = UIImageJPEGRepresentation(image, 0.9)!
+            //            let data: Data = UIImagePNGRepresentation(image)!
+            
+            arrDataNeedSend = DataTransferHandle.splitPackets(with : data)
+        }
+        
+        let firstPacket: DataModel = DataModel.init(sendStart: arrDataNeedSend!.count)
+        peripheralManager!.updateValue(firstPacket.getData(), for: curCharacteristics![0], onSubscribedCentrals: nil)
     }
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public let dataHeader: UInt8 = 0xff /// 数据包header
+public let dataHeader: UInt8 = 0xf0 /// 数据包header
 
 /// command
 enum DataCommand: UInt8 {
@@ -19,6 +19,7 @@ enum DataCommand: UInt8 {
     
     /// centerManager
     case readyForReceiveData = 0x10    /// 中心设备通知外设，已准备好接收数据
+    case receiveDataSuccess = 0x11     /// 数据接收成功，如果是分包数据，写入分包序号
 }
 
 class DataModel: NSObject {
@@ -37,7 +38,7 @@ class DataModel: NSObject {
         length = data[2]
         
         let lengthInt = Int(littleEndian: Int(length!))
-        let range: ClosedRange = 3...(2 + lengthInt)
+        let range: ClosedRange = 3...(2 + lengthInt - 1)
         dataContent = data.subdata(in: Range.init(range))
         
         checkSum = data.last
@@ -49,8 +50,19 @@ class DataModel: NSObject {
         
         header = dataHeader
         command = DataCommand.multipleDataTransfer
-        length = UInt8(data!.count)
+        length = UInt8(data!.count) + UInt8(1)
         dataContent = data
+        checkSum = DataTransferHandle.getCheckSum(dataContent!, length!)
+    }
+    
+    init(sendSingleData num: Int) {
+        super.init()
+        header = dataHeader
+        command = DataCommand.singleData
+        
+        let hexStr = DataTransferHandle.toHex(num: num)
+        dataContent = DataTransferHandle.dataWithHexString(str: hexStr as NSString, 1)
+        length = UInt8(dataContent!.count) + UInt8(1)
         checkSum = DataTransferHandle.getCheckSum(dataContent!, length!)
     }
     
@@ -60,8 +72,8 @@ class DataModel: NSObject {
         command = DataCommand.multipleDataStart
         
         let hexStr = DataTransferHandle.toHex(num: packets)
-        dataContent = hexStr.data(using: String.Encoding.utf8)!
-        length = UInt8(dataContent!.count)
+        dataContent = DataTransferHandle.dataWithHexString(str: hexStr as NSString, 1)
+        length = UInt8(dataContent!.count) + UInt8(1)
         checkSum = DataTransferHandle.getCheckSum(dataContent!, length!)
     }
     
@@ -71,8 +83,27 @@ class DataModel: NSObject {
         command = DataCommand.multipleDataFinish
         
         let hexStr = DataTransferHandle.toHex(num: packets)
-        dataContent = hexStr.data(using: String.Encoding.utf8)!
-        length = UInt8(dataContent!.count)
+        dataContent = DataTransferHandle.dataWithHexString(str: hexStr as NSString, 1)
+        length = UInt8(dataContent!.count) + UInt8(1)
+        checkSum = DataTransferHandle.getCheckSum(dataContent!, length!)
+    }
+    
+    init(readyForData data: Int) {
+        super.init()
+        header = dataHeader
+        command = DataCommand.readyForReceiveData
+        length = UInt8(2)
+        dataContent = Data.init(bytes: [0])
+        checkSum = UInt8(0)
+    }
+    
+    init(receiveSuc Index: Int) {
+        super.init()
+        header = dataHeader
+        command = DataCommand.receiveDataSuccess
+        let hexStr = DataTransferHandle.toHex(num: Index)
+        dataContent = DataTransferHandle.dataWithHexString(str: hexStr as NSString, 2)
+        length = UInt8(dataContent!.count) + UInt8(1)
         checkSum = DataTransferHandle.getCheckSum(dataContent!, length!)
     }
     

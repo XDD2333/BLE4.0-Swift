@@ -11,7 +11,7 @@ import UIKit
 
 class RootViewController: UIViewController {
     override func viewDidLoad() {
-        
+
     }
     
     override func viewWillDisappear(_ animated: Bool) {
