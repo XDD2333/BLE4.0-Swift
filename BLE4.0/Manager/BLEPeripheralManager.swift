@@ -129,7 +129,7 @@ class BLEPeripheralManager: NSObject, CBPeripheralManagerDelegate {
                 let characteristic: CBMutableCharacteristic = request.characteristic as! CBMutableCharacteristic
                 characteristic.value = request.value
                 let data: DataModel = DataModel.init(recevied: request.value!)
-                log("中心设备成功写入: \(String(describing: data.dataContent?.description))")
+                log("中心设备成功写入: \(DataTransferHandle.toHex(data: data.dataContent!))")
                 if data.command == .receiveDataSuccess {
                     let index: Int = DataTransferHandle.hexToInt(number: DataTransferHandle.toHex(data: data.dataContent!))
                     if index < arrDataNeedSend!.count {

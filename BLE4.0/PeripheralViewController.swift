@@ -51,4 +51,9 @@ class PeripheralViewController: UIViewController, LogDelegate {
     @IBAction func sendMultipleData(_ sender: Any) {
         BLEPeripheralManager.sharedManager.sendMultipleData()
     }
+
+    @IBAction func clearAction(_ sender: Any) {
+        logView.clear()
+    }
+    
 }

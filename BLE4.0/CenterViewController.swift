@@ -106,7 +106,7 @@ class CenterViewController: UIViewController, LogDelegate, BLECenterManagerDeleg
     
         switch data.command! {
         case .singleData:
-            logHeader = "[DATA]收到单条数据, 校验结果: \(data.isValid) value: \(String(describing: data.dataContent!.description))"
+            logHeader = "[DATA]收到单条数据, 校验结果: \(data.isValid) value: \(DataTransferHandle.toHex(data: data.dataContent!))"
         case .multipleDataStart:
             imageView.image = nil
             transferProgress.progress = 0
@@ -126,8 +126,8 @@ class CenterViewController: UIViewController, LogDelegate, BLECenterManagerDeleg
         case .multipleDataTransfer:
             logHeader = "[DATA]收到第\(String(describing: receivedPackets))个包, 校验结果: \(data.isValid)"
             
-            transferProgress.progress = Float(receivedPackets!) / 342.0
-            lblTransfer.text = "\(transferProgress.progress)"
+            transferProgress.progress = Float(receivedPackets!) / 244.0
+            lblTransfer.text = String.init(format: "%.2f%%", transferProgress.progress * 100)
             
             if data.isValid {
                 dataReceived.append(data.dataContent!)

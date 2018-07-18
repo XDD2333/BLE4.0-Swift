@@ -8,18 +8,18 @@
 
 import Foundation
 
-public let dataHeader: UInt8 = 0xf0 /// 数据包header
+public let dataHeader: UInt8 = 0xfe /// 数据包header
 
 /// command
 enum DataCommand: UInt8 {
-    case singleData = 0x01             /// 单条完整数据
+    case singleData = 0x01             /// 发送单条完整数据
     case multipleDataStart = 0x02      /// 分包数据开始发送（发送分包数量）
     case multipleDataTransfer = 0x03   /// 分包数据传输中
     case multipleDataFinish = 0x04     /// 分包数据发送完毕
     
     /// centerManager
     case readyForReceiveData = 0x10    /// 中心设备通知外设，已准备好接收数据
-    case receiveDataSuccess = 0x11     /// 数据接收成功，如果是分包数据，写入分包序号
+    case receiveDataSuccess = 0x11     /// 中心设备数据接收成功，如果是分包数据，将下一个分包序号写入外设
 }
 
 class DataModel: NSObject {

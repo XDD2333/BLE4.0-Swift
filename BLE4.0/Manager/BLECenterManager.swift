@@ -108,8 +108,9 @@ class BLECenterManager: NSObject, CBCentralManagerDelegate, CBPeripheralDelegate
     
     /// 发现外设
     func centralManager(_ central: CBCentralManager, didDiscover peripheral: CBPeripheral, advertisementData: [String : Any], rssi RSSI: NSNumber) {
+//        log("[FOUND] advertisementDataName: \(advertisementData["kCBAdvDataLocalName"]) name:\(String(describing: peripheral.name)), RSSI: \(RSSI)db")
         if let name = advertisementData["kCBAdvDataLocalName"] {
-            log("[FOUND] device LocalName: \(name) name:\(String(describing: peripheral.name)), RSSI: \(RSSI)db")
+            log("[FOUND] advertisementDataName: \(name) name:\(String(describing: peripheral.name)), RSSI: \(RSSI)db")
             curName = name as? String
             if name as! String == deviceName {
                 if !onlyScan {

@@ -42,7 +42,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ejn-OY-HO6">
-                    <rect key="frame" x="61" y="133" width="92" height="30"/>
+                    <rect key="frame" x="61" y="119" width="92" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="发送单条数据"/>
                     <connections>
@@ -50,11 +50,19 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SY8-uM-6t7">
-                    <rect key="frame" x="236" y="133" width="92" height="30"/>
+                    <rect key="frame" x="236" y="119" width="92" height="30"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                     <state key="normal" title="发送分包数据"/>
                     <connections>
                         <action selector="sendMultipleData:" destination="-1" eventType="touchUpInside" id="7h1-eR-mN2"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="POv-4L-AX8">
+                    <rect key="frame" x="61" y="157" width="57" height="30"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                    <state key="normal" title="清空Log"/>
+                    <connections>
+                        <action selector="clearAction:" destination="-1" eventType="touchUpInside" id="phQ-p0-2bM"/>
                     </connections>
                 </button>
             </subviews>

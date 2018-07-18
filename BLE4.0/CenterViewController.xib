@@ -31,8 +31,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gUa-ic-oAT" customClass="LogView" customModule="BLE4_0" customModuleProvider="target">
-                    <rect key="frame" x="10" y="346" width="355" height="321"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gUa-ic-oAT" customClass="LogView" customModule="BLE4_0" customModuleProvider="target">
+                    <rect key="frame" x="10" y="290" width="355" height="377"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nUy-Up-bAK">
@@ -131,7 +131,7 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WcV-bd-ihZ">
-                    <rect key="frame" x="152" y="267" width="71" height="71"/>
+                    <rect key="frame" x="276" y="162" width="53" height="53"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 </imageView>
             </subviews>
@@ -140,7 +140,7 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="gUa-ic-oAT" secondAttribute="bottom" id="63d-qm-gP6"/>
                 <constraint firstItem="gUa-ic-oAT" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="CZ0-rE-Z8K"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="gUa-ic-oAT" secondAttribute="trailing" constant="10" id="hRB-oN-mdS"/>
-                <constraint firstItem="gUa-ic-oAT" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="220" id="rCr-4B-n0g"/>
+                <constraint firstItem="gUa-ic-oAT" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="270" id="rCr-4B-n0g"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <point key="canvasLocation" x="33.5" y="53.5"/>
